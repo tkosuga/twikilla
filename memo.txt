@@ -1,0 +1,57 @@
+
+
+spec -c -fs --drb spec/model/bot_spec.rb
+
+------------------------------------------------
+cronの内容
+
+crontab -e
+
+*/4 * * * * cd /var/www/twikilla; ruby script/runner 'Bot.crawl_hashtag_spammer' >> /var/www/twikilla/log/cron.log 2>&1
+0 15 * * * cd /var/www/twikilla; ruby script/runner 'Bot.crawl_ask_retweet(5000)' >> /var/www/twikilla/log/cron.log 2>&1
+0 17 * * * cd /var/www/twikilla; ruby script/runner 'Bot.crawl_follow7(5000)' >> /var/www/twikilla/log/cron.log 2>&1
+
+------------------------------------------------
+
+ruby script/console p
+
+Spammer.hashed_tag_spammers
+Spammer.automated_following_spammers
+Spammer.ask_retweet_spammers
+
+------------------------------------------------
+
+botの追加
+
+Auth.show_request_token_detail
+Auth.show_access_token_detail("A4c7U4rvup6f8agSboOtEBKxMSYXki7HADtnwVNUyA", "citZD6qwTg7SOBCDB8cLpWRsJ6h5qdSxQSgnRvV04", 3306115)
+
+------------------------------------------------
+
+botアカウント
+
+twikilla_bot1
+tlTcwkv5
+tkosuga+80@gmail.com
+
+twikilla_bot2
+cfyzdVvt　
+tkosuga+81@gmail.com
+
+twikilla_bot3
+IcFdtzfn
+tkosuga+82@gmail.com
+
+twikilla_bot4
+bpYnUMm0
+tkosuga+83@gmail.com
+
+------------------------------------------------
+
+地域ッターアカウント(スパムの巣窟
+
+"地域ッター西日本";"tkosug.a@gmail.com";"SFSa9ghD"
+"地域ッター東日本";"tkosu.ga@gmail.com";"5o15YcCr"
+
+
+------------------------------------------------

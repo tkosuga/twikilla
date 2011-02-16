@@ -1,0 +1,152 @@
+<head>
+<%= 
+render :partial => "parts/head", :locals => {
+ :title => "ツイキラー｜ツイッタースパムフィルター｜あなたのフォローにいるスパマーを見つけます！",
+ :description => "あなたのフォローにスパムアカウントは含まれていませんか？このサービスはツイッターのスパムフィルターです。機械的にスパムアカウントを見つけ出し一覧表示します。"
+}
+%>
+	<link rel="canonical" href="http://twikilla.jp/" />
+</head>
+<body>
+
+<div id="wrap">
+  <%= render :partial => "parts/header" %>
+
+<div id="intro"> 
+
+  <div class="action">
+	  <a href="/oauth"><%= image_tag "perform.png", :alt => "フォローしているスパムを検出する", :width => 320, :height => 52 %></a>
+  </div>
+
+  <div style="text-align: center;">
+    ボタンを押すと次画面で、「ツイキラーによるアクセスを許可しますか？」と質問されますので「許可する」を選択下さい。
+		フォローの多い方は5分ほどかかる時がありますが、エラーではありませんのでそのままお待ち下さい。
+  </div>
+
+</div>
+
+<div id="content">
+<div class="left"> 
+
+	<div id="social_navigation">
+	  <a href="javascript:void(window.open('http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t='+encodeURIComponent(document.title)+'&amp;u='+encodeURIComponent('http://twikilla.jp/')+'&amp;ei=UTF-8','_blank','width=550,height=480,left=100,top=50,scrollbars=1,resizable=1',0));">
+	    <img width="125" height="17" style="border: medium none;" alt="Yahoo!ブックマークに登録" src="http://i.yimg.jp/images/ybm/blogparts/addmy_btn.gif" />
+	  </a>
+	  <a href="javascript:location.href='http://b.hatena.ne.jp/append?'+encodeURIComponent('http://twikilla.jp/');"><img width="16" height="16" src="images/social_icons/20091030_1329103.gif" alt="はてなブックマークへ追加する" /></a>
+	  <a href="javascript:location.href='http://del.icio.us/post?url='+encodeURIComponent('http://twikilla.jp/')+'&amp;title='+encodeURIComponent(document.title);"><img width="12" height="16" src="images/social_icons/20091030_1329104.gif" alt="del.cio.usへ追加する" /></a>
+	  <a href="javascript:location.href='http://www.google.com/bookmarks/mark?op=edit&amp;bkmk='+encodeURIComponent('http://twikilla.jp/')+'&amp;title='+document.title;" title="Googleブックマークへ追加する"><img width="12" height="16" src="images/social_icons/20091030_1329107.gif" alt="Googleブックマークへ追加する" /></a>
+	  <a href="javascript:location.href='http://bookmarks.yahoo.co.jp/action/bookmark?t='+document.title+'&amp;u='+encodeURIComponent('http://twikilla.jp/');"><img width="16" height="16" src="images/social_icons/20091030_1329108.gif" alt="Yahoo!ブックマークへ追加する" /></a>
+	  <a href="javascript:location.href='http://digg.com/submit?phase=2&amp;url='+encodeURIComponent('http://twikilla.jp/')+'&amp;title='+document.title;"><img width="16" height="16" src="images/social_icons/20091030_1329114.gif" alt="diggへ追加する" /></a>
+	  <a href="javascript:location.href='http://s.evernote.com/grclip?url='+encodeURIComponent('http://twikilla.jp/')+'&amp;title='+document.title;"><img width="16" height="16" src="images/social_icons/20100425_1772876.png" alt="Evernoteにクリップする" /></a>
+	  <a href="http://twitter.com/" onclick="window.open('http://twitter.com/home?status='+document.title+' '+encodeURIComponent('http://twikilla.jp/')); return false;"><img width="16" height="16" src="images/social_icons/20091029_1326083.png" alt="Twitterでつぶやく" /></a>
+  </div>
+  <br />
+
+  <h2>サービス趣旨</h2>
+  <div class="articles">
+    機械的にフォロー、フォロワーを増やすサービスに登録しているアカウントを隔離するために開発しました。
+    このような自動でフォロー・リムーブを行なうサービス、またはツールを利用するのはスパム行為に加担している事になります。
+    そのようなサービス、またはツールを利用するのは止めましょう。
+
+
+
+      <div class="articles" style="padding: 10px; padding-top: 20px;">
+過剰なフォロー・フォロワー増加目的の自動ツールはツイッターの規約違反
+<a href="http://kokumaijp.blog70.fc2.com/blog-entry-131.html">http://kokumaijp.blog70.fc2.com/blog-entry-131.html</a>
+      </div>
+
+      <div class="articles" style="padding: 10px;">
+「フォロワー急増！」などのサードパーティのアプリケーションの使用
+<a href="http://jptwitterhelp.blogspot.com/2010/05/blog-post_9657.html">http://jptwitterhelp.blogspot.com/2010/05/blog-post_9657.html</a>
+      </div>
+
+
+  </div>
+  <br /><br />
+ 
+              <h2>スパマー算出のロジック</h2>
+      <div class="articles">
+                                以下のルールからスパマーであることを算出しています。そのため、スパムを行っていないユーザーや、今はスパム行為を行っていないユーザ
+ーが結果に含まれます。
+                     <ul style="padding: 10px;">
+                      <li>フォロー数が5000人以上で、フォロワー数とフォロー数がある比率内にある。</li>
+                      <li>自動フォローサービス、自動RTサービスへの登録している、もしくは利用している。</li>
+                      <li>特定のハッシュタグを多用している。</li>
+                    </ul>
+
+      </div>
+
+      <div class="articles" style="padding: 10px;">
+フォロー5000人以上のある比率にあるアカウントをスパムとして表示しているのは、自動でフォロワー数を増やすツール、サービスに登録しているアカウントの特徴としてあげられるためです。フォロー返しを行うユーザーもこの条件に一致するため、スパムを行っていないユーザーが表示されるケースが多くなっています。
+      </div>
+      
+      <div class="articles" style="padding: 10px;">
+また、ツイッターはじめたばかりのアカウントがスパム行為に加担することと知らずに、自動フォローツールに登録するケースがあります。そういったユーザーもスパムして検出されます。
+      </div>
+ 
+      <div class="articles" style="padding: 10px;">
+上記ロジックを参照した上で、ご判断下さいますようお願いします。
+      </div>
+
+  <h2>サービス説明</h2>
+  <div class="articles">
+    フォローしているアカウントに対するスパムフィルターです。自分のフォローしている友達にスパムをしている人がいないかを検出できます。
+		フィルターにかける事が出来るフォロー数の上限は2000人です。
+		2010年8月19日時点で実装しているスパムフィルターは以下になります。
+
+    <ul style="padding: 10px;">
+      <li>ハッシュタグスパム</li>
+      <li>自動フォロースパム</li>
+      <li>RTスパム</li>
+    </ul>
+
+  </div>
+  <br /><br />
+
+  <h2>サービス使い方</h2>
+  <div class="articles">
+  	
+		「フォローしているスパムを検出する」を押すと次画面で、「ツイキラーによるアクセスを許可しますか？」と質問されますので「許可する」を選択下さい。
+		そのまましばらく待ちますと、スパムと思われるフォローの一覧が表示されます。
+		
+    <div style="padding-top: 10px; padding-bottom: 10px;"><%= image_tag "tutorial1.png", :width => 501, :height => 448, :style => "border: 4px solid black;", :alt => "スパマー検出結果" %></div>
+    アカウントとアイコン部分がtwitterへのリンクとなっています。リンク先のプロフィールを確認し、フォローの継続、解除、スパム報告を行い下さい。
+  </div>
+  <br /><br />
+
+  <h2>連携アプリ認証について</h2>
+  <div class="articles">
+    ツイキラーではTwitter APIを利用してフォロワーのスパム検出を行ないます。そのためにあなたのアカウントの連携アプリにツイキラーを登録します。
+    認証を行なうと、あなたのアカウント情報に対する操作をこのアプリケーションから利用できるようになります。
+    解除される方は<a href="http://twitter.com/settings/connections">許可した連携アプリの一覧</a>からツイキラーの許可を取り消して下さい。
+  </div>
+  <br /><br />
+
+  <h2>リリースノート</h2>
+  <div class="articles">
+    <p>2010/8/20 各種調整、スパム報告機能の追加</p>
+    <p>2010/8/19 α版リリース</p>
+  </div>
+  <br /><br />
+  
+  <h2>免責事項</h2>
+  <div class="articles">
+    本サイトは、あなたに対して何も保証しません。本サイトの関係者（他の利用者も含む）は、あなたに対して一切責任を負いません。
+    あなたが、本サイトを利用する場合は、自己責任で行う必要があります。利用の結果生じた損害について、一切責任を負いません。
+  </div>
+  <br /><br />
+
+  <div class="articles">
+	  <a href="/oauth"><%= image_tag "perform.png", :alt => "フォローしているスパムを検出する", :width => 320, :height => 52 %></a>
+  </div>
+
+  </div>
+
+  <%= render :partial => "parts/right_bar" %>
+
+</div>
+</div>
+
+<%= render :partial => "parts/footer" %>
+
+</body>

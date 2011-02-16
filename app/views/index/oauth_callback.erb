@@ -1,0 +1,104 @@
+<head>
+	<%= render :partial => "parts/head", :locals => {:title => "#{@customer.profile["name"]}｜ツイキラースパムフィルター結果｜スパムと思われるフォローが#{@spammers.size}人見つかりました。", :description => ""} %>
+	<%= javascript_include_tag "prototype.js" %>
+</head>
+<body>
+<div id="wrap">
+  <%= render :partial => "parts/header" %>
+  <div id="intro"> 
+		<div class="action">
+  	  <a href="http://twitter.com/" onclick="window.open('http://twitter.com/home?status='+document.title+' '+encodeURIComponent('http://twikilla.jp/')); return false;">
+				<%= @customer.profile["name"] %>さんのスパム検出結果をTwitterでつぶやきましょう！
+		  </a>
+		</div>
+    <div style="text-align: center; margin: 0px; padding-bottom: 16px;">
+      <%= image_tag(@customer.profile["profile_image_url"], :width => 48, :height => 48) %>
+    </div>
+  </div>
+  <div id="content">
+    <div class="left"> 
+      <h2>スパマーと思われるフォローが<%= @spammers.size %>人見つかりました。</h2>
+    
+      <div class="articles">
+        このフォロワーたちは本当にスパマーでしょうか？機械的に算出しているので間違いがあるかも知れません。
+        <strong>必ずリンク先をご確認した上で、フォロー解除、スパム報告を行い下さい。</strong>
+      </div>
+      <br /><br />
+
+      <h2>精度を向上させるためスパム判定ボタンのクリックをお願いします。</h2>
+
+      <div class="articles">
+				<ul>
+					<li>緑色の「スパムではありません」ボタンを押す方が多ければ、スパム表示されなくなります。</li>
+					<li>赤色の「スパマーとして報告します」ボタンを押す方が多ければ、スパム表示され続けます。</li>
+				</ul>
+				1フォローに対して1回の投票が可能です。お手数ですが、ご協力のほどお願い致します。
+      </div>
+      <br /><br />
+
+  		<div class="fakeContainer">
+      <table id="spammers">
+        <thead>
+          <tr>
+            <th>アカウント<br />(国コード)</th>
+            <th>アイコン</th>
+            <th width="104px" style="white-space:nowrap;">(上)<br />フォロワー<br />(下)<br />フォロー</th>
+            <th width="48px">ハッシュスパム</th>
+            <th width="48px">RTスパム</th>
+            <th width="48px">自動フォロースパム</th>
+          	<th width="104px">報告ボタン</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @spammers.each_with_index{|spammer, index| %>
+          <tr>
+            <td><%= link_to spammer.user, "http://twitter.com/#{spammer.user}", :rel => "nofollow", :target => "_blank" %><br />(<%=h spammer.iso_language_code %>)</td>
+            <td><%= link_to image_tag(spammer.profile_image_url, :width => 48, :height => 48), "http://twitter.com/#{spammer.user}", :rel => "nofollow", :target => "_blank" %></td>
+            <td><%=h spammer.followers_count %><br /><%=h spammer.friends_count %></td>
+            <td><%= spammer.hashed_tag_spammer ? image_tag("spammer_check.png", :width => 24, :height => 24) : "&nbsp;" %></td>
+            <td><%= spammer.rt_spammer ? image_tag("spammer_check.png", :width => 24, :height => 24) : "&nbsp;" %></td>
+            <td><%= spammer.automated_following_spammer ? image_tag("spammer_check.png", :width => 24, :height => 24) : "&nbsp;" %></td>
+            <td width="104px">
+            	<span id="spammer_apply_block_<%= spammer.id %>">
+            		<% if (spammer.applied?(session[:user_id])) %>
+									<%= image_tag("applied_spammer_button.png", :alt => "ご協力ありがとうございました", :width => 48, :height => 48) %>
+            		<% else %>
+									<%= link_to_remote(image_tag("isnt_spammer_button.png", :alt => "スパムではありません", :width => 48, :height => 48), 
+																										:update => "spammer_apply_block_#{spammer.id}", 
+																										:url => {:controller => :index, :action => :isnt_spammer, :spammer_id => spammer.id})
+									 %>
+									<%= link_to_remote(image_tag("is_spammer_button.png", :alt => "スパマーとして報告します", :width => 48, :height => 48), 
+																										:update => "spammer_apply_block_#{spammer.id}", 
+																										:url => {:controller => :index, :action => :is_spammer, :spammer_id => spammer.id})
+									 %>
+            		<% end %>
+							 </span>
+					  </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+  		</div>
+
+      <div class="articles">
+	      <h2>スパマー算出のロジック</h2>
+				以下のルールからスパマーであることを算出しています。そのため、スパムを行っていないユーザーや、今はスパム行為を行っていないユーザーが結果に含まれます。
+		     <ul style="padding: 10px;">
+		      <li>フォロー数が5000人以上で、フォロワー数とフォロー数がある比率内にある。</li>
+		      <li>自動フォローサービス、自動RTサービスへの登録している、もしくは利用している。</li>
+		      <li>特定のハッシュタグを多用している。</li>
+		    </ul>
+      </div>
+
+<%= stylesheet_link_tag "superTables_compressed.css" %>
+<%= javascript_include_tag "superTables_compressed.js" %>
+<script type="text/javascript">
+var super_table = new superTable("spammers");
+</script>
+
+    </div>
+    <%= render :partial => "parts/right_bar" %>
+  </div>
+  <%= render :partial => "parts/footer" %>
+</div>
+</body>

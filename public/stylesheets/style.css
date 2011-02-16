@@ -1,0 +1,189 @@
+* {
+  padding: 0;
+  margin: 0;
+} 
+
+body {
+  background: #fff url(/images/bg.jpg) repeat-x;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #333333;;
+}
+
+img {
+  border: none;
+}
+  
+a {
+  color: #26478A; text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline; color : #000;
+}
+
+#wrap {
+  margin: 0 auto;
+  width: 800px;
+}
+
+#header { 
+  height: 60px;
+  background: #26478A url(/images/header.jpg) no-repeat;
+}
+
+#header h1 {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 6px 0 5px 10px;
+}
+
+#header h1 a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#header h1 a:hover {
+  color: #eee;
+  text-decoration: none;
+}
+
+#header h2 {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 0 0 0 11px;
+}
+
+#intro {
+  background: #fff url(/images/intro.jpg) no-repeat;
+  height: 90px;
+  padding: 30px;
+}
+
+#intro .action {
+  padding: 2px 0 6px 36px;
+  margin: 0px;
+  padding-bottom: 16px; 
+  background-image: url('/images/arrow_left_32.png');
+	background-position: 0 14px;
+  background-repeat: no-repeat;
+}
+
+#intro .action a {
+  color: #000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#intro .action a:hover {
+  /*border-bottom: 2px solid #000;*/
+}
+
+
+#content {
+  padding: 10px 20px;
+}
+
+.left {
+  width: 498px;
+  float: left;
+  text-align: justify;
+}
+.left h2 {
+  color: #2647CA;
+  font-size: 16px;
+  font-weight: 100;
+  padding : 12px 0 10px 28px;
+  background-image: url("/images/stock_draw-square_16.png");
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.right {
+width: 220px;
+float: right;
+padding: 10px;
+border-left: 1px solid #bbb;
+font-size: 12px;
+}
+.right ul {
+list-style-type: square;
+padding: 5px 10px 10px 20px;
+}
+.right li {
+padding: 0 0 8px 0;
+}
+
+.right h2 {
+height: 30px;
+font-size: 15px;
+color: #666;
+font-weight: 100;
+}
+.right a { text-decoration: none }
+
+#footer {
+border-top: 1px solid #aaa;
+text-align: center;
+color: #333;
+font-size: 11px;
+padding: 0 0 10px 0;
+margin-top: 20px;
+}
+
+.articles ul {
+  padding: 10px 0 10px 20px;
+}
+
+.articles li {
+  padding: 3px 0 3px 0;
+}
+
+
+/* "Winter Blues" CSS theme for CSS Table Gallery (http://icant.co.uk/csstablegallery/) by Gunta Klavina (http://www.klavina.com) */
+
+table {padding: 0; margin: 0; border-collapse: collapse; color: #333; background: #F3F5F7; width: 498px;}
+
+table a {color: #3A4856; text-decoration: none; border-bottom: 1px solid #C6C8CB;}  
+
+table a:visited {color: #777;}
+
+table a:hover {color: #000;}  
+
+table caption {text-align: left; text-transform: uppercase;  padding-bottom: 10px; font: 200% "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif;}
+
+table thead th {background: #3A4856; padding: 15px 10px; color: #fff; text-align: left; font-weight: normal;}
+
+table tbody, table thead {border-left: 1px solid #EAECEE; border-right: 1px solid #EAECEE;}
+
+table tbody {border-bottom: 1px solid #EAECEE;}
+                      
+table tbody td, table tbody th {padding: 10px; background: url("td_back.gif") repeat-x; text-align: left;}
+
+table tbody tr {background: #F3F5F7;}
+
+table tbody tr.odd {background: #F0F2F4;}
+
+table tbody  tr:hover {background: #EAECEE; color: #111;}
+
+table tfoot td, table tfoot th, table tfoot tr {text-align: left; font: 120%  "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", sans-serif; text-transform: uppercase; background: #fff; padding: 10px;}
+
+.fakeContainer { 
+    margin: 0 0 20px;
+    width: 518px;
+    height: 640px;
+    overflow: hidden;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix { /* for IE */
+  display: inline-block;
+}

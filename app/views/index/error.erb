@@ -1,0 +1,32 @@
+<head>
+<%= 
+render :partial => "parts/head", :locals => {
+ :title => "ツイキラー｜エラーが発生しました",
+ :description => ""
+}
+%>
+</head>
+<body>
+
+<div id="wrap">
+  <%= render :partial => "parts/header" %>
+
+<div id="intro"> 
+  <div style="text-align: center;">
+		<%= @error_message %>
+  </div>
+  <div style="text-align: center;">
+		<%= @original_exception.message if defined?(@original_exception) %>
+  </div>
+  <br />
+  <div style="text-align: center;">
+		<%= link_to "トップページ", "/" %>へ戻りもう一度、操作を行ってください。この問題が解決しない場合にはお手数ですが<%= link_to "tkosuga", "http://twitter.com/tkosuga" %>まで教えて頂けますと幸いです。
+  </div>
+
+</div>
+
+</div>
+
+<%= render :partial => "parts/footer" %>
+
+</body>
